@@ -4,17 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
-<title>Singende Pferde</title>
+<title>Pfröhlich Pflötende Pferde</title>
 <style>
 * { box-sizing: border-box; }
 html, body { width:100%; height:100%; margin:0; }
-body { background:#fff; display:grid; place-items:center; overflow:hidden; }
+body { background:#fff; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:clamp(14px,3vw,28px); padding:16px; overflow:auto; }
+h1 { font-family:Georgia, "Times New Roman", serif; font-size:clamp(26px,5vw,48px); text-align:center; line-height:1.15; font-weight:700; margin:0; color:#52351e; }
 #stage { width:min(100vw, 900px); aspect-ratio: 550 / 300; }
 #stage ruffle-player { width:100%; height:100%; display:block; }
 #error {display:none; font:15px system-ui; padding:20px;text-align:center}
 </style>
 </head>
 <body>
+<h1>Pfröhlich Pflötende Pferde</h1>
 <main id="stage" aria-label="Vier singende Pferde"></main>
 <div id="error">Die Pferde konnten nicht geladen werden. Bitte die Seite im normalen Browser öffnen.</div>
 <script>
