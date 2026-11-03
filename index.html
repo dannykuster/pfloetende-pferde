@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Singende Pferde</title>
+<style>
+* { box-sizing: border-box; }
+html, body { width:100%; height:100%; margin:0; }
+body { background:#fff; display:grid; place-items:center; overflow:hidden; }
+#stage { width:min(100vw, 900px); aspect-ratio: 550 / 300; }
+#stage ruffle-player { width:100%; height:100%; display:block; }
+#error {display:none; font:15px system-ui; padding:20px;text-align:center}
+</style>
+</head>
+<body>
+<main id="stage" aria-label="Vier singende Pferde"></main>
+<div id="error">Die Pferde konnten nicht geladen werden. Bitte die Seite im normalen Browser öffnen.</div>
+<script>
+window.RufflePlayer = window.RufflePlayer || {};
+window.RufflePlayer.config = {
+  autoplay: "on",
+  unmuteOverlay: "visible",
+  splashScreen: false,
+  scale: "showAll",
+  letterbox: "off",
+  showSwfDownload: false,
+  contextMenu: "off"
+};
+</script>
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+<script>
+window.addEventListener("DOMContentLoaded", async () => {
+  try {
+    if (!window.RufflePlayer || !window.RufflePlayer.newest) throw Error("Ruffle unavailable");
+    const player = window.RufflePlayer.newest().createPlayer();
+    document.getElementById("stage").appendChild(player);
+    if (typeof player.ruffle === "function") {
+      await player.ruffle().load("hestekor.swf");
+    } else {
+      await player.load("hestekor.swf");
+    }
+  } catch(err) {
+    console.error(err);
+    document.getElementById("stage").style.display="none";
+    document.getElementById("error").style.display="block";
+  }
+});
+</script>
+</body>
+</html>
